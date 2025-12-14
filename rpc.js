@@ -25,26 +25,32 @@ function treatGameInput (input) {
 }
 
 function playerWinsPlay (userInput, botInput) {
-    if (userInput === "Rock" && botInput == "Scissors") return true
-    if (userInput === "Paper" && botInput == "Rock") return true
-    if (userInput === "Scissors" && botInput == "Paper") return true
 
-    return false;
+    if(userInput === botInput) {
+        console.log(`Oh! Same choice, try again!`);
+        return false;
+    } else if (userInput === "Rock" && botInput == "Scissors" || userInput === "Paper" && botInput == "Rock" || userInput === "Scissors" && botInput == "Paper") {
+        console.log(`${userInput} beats ${botInput}, keep it going!`);
+        return true;
+    } else {
+        console.log(`${botInput} beats ${userInput}, try next time!`);
+        return false;
+    }
 }
 
 function playGame () {
     let score = 0;
 
     for (let plays = 1; plays <= 5; plays++ ) {
-        userInput = getHumanChoice();
-        botInput = getComputerChoice();
+        const userInput = getHumanChoice();
+        const botInput = getComputerChoice();
     
         if(playerWinsPlay(userInput, botInput))  {
             score++;
-            console.log('Player won this round!');
+            //console.log('Player won this round!');
         }
 
-        console.log('Bot won thiss round! Keep it up!');
+        //console.log('Bot won this round! Keep it up!');
         
     }
 
