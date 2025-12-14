@@ -31,3 +31,26 @@ function playerWinsPlay (userInput, botInput) {
 
     return false;
 }
+
+function playGame () {
+    let score = 0;
+
+    for (let plays = 1; plays <= 5; plays++ ) {
+        userInput = getHumanChoice();
+        botInput = getComputerChoice();
+    
+        if(playerWinsPlay(userInput, botInput))  {
+            score++;
+            console.log('Player won this round!');
+        }
+
+        console.log('Bot won thiss round! Keep it up!');
+        
+    }
+
+    return showResult(score)
+}
+
+function showResult (gameScore) {
+    return `Player won ${gameScore} of the total 5 games!`
+}
