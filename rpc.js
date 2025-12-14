@@ -45,13 +45,7 @@ function playGame () {
         const userInput = getHumanChoice();
         const botInput = getComputerChoice();
     
-        if(playerWinsPlay(userInput, botInput))  {
-            score++;
-            //console.log('Player won this round!');
-        }
-
-        //console.log('Bot won this round! Keep it up!');
-        
+        if(playerWinsPlay(userInput, botInput)) score++;
     }
 
     return showResult(score)
