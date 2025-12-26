@@ -1,4 +1,4 @@
-const npcPlay = document.querySelector(".npc-play");
+const npcPlay = document.querySelector("#npc-play");
 const playButtons = document.querySelector(".play-btns");
 const resultSec = document.querySelector(".result");
 
@@ -7,7 +7,6 @@ let playerScore = 0;
 
 
 playButtons.addEventListener("click", (e) => {
-    cleanPage();
     let playerChoice = treatGameInput(e.target.textContent);
     playGame(playerChoice);
     
@@ -49,15 +48,18 @@ function playerWinsPlay (userInput, botInput) {
         return true;
     } else {
         console.log(`${botInput} beats ${userInput}, try next time!`);
-        return false;
+        return false; 
     }
 }
 
 function playGame (userInput) {
+    cleanPage();
     //let score = 0;
     if(!curPlaysLeft <= 0) {
         const botInput = getComputerChoice();
-    
+
+        showNpcPlay (botInput);
+
         if(playerWinsPlay(userInput, botInput)) playerScore++;
         
         if(curPlaysLeft <= (--curPlaysLeft)) {
@@ -72,7 +74,7 @@ function playGame (userInput) {
 
 function cleanPage () {
     let resultChildren = Array.from(resultSec.children);
-    if (!resultChildren.length === 0) {
+    if (resultChildren.length !== 0) {
         resultChildren.forEach(element => {
             element.textContent = " ";
         });
@@ -85,4 +87,13 @@ function showResult ()  {
     result.textContent = `Out of the five games, player won ${playerScore} of them`;
     resultSec.appendChild(result);
 
+    //resets game
+    curPlaysLeft = 5;
+    playerScore = 0;
+
+}
+
+function showNpcPlay (play) {
+    npcPlay.textContent = " ";
+    npcPlay.textContent = play;
 }
