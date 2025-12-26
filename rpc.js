@@ -1,3 +1,7 @@
+const npcPlay = document.querySelector(".npc-play");
+const playButtons = document.querySelector(".play-btns");
+const resultSec = document.querySelector(".result");
+
 function getComputerChoice () {
     let choice = Math.floor((Math.random() * 3) + 1);
     let play;
