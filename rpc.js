@@ -1,3 +1,4 @@
+const pageBody = document.querySelector('body');
 const npcPlay = document.querySelector("#npc-play");
 const playButtons = document.querySelector(".play-btns");
 const resultSec = document.querySelector(".result");
@@ -23,13 +24,6 @@ function getComputerChoice () {
         play = "Scissors";
     }
     return play;
-}
-
-function getHumanChoice () {
-    let humanChoice = prompt("What is your play? Rock, Paper or Scissors?");
-    humanChoice = treatGameInput(humanChoice);
-
-    return humanChoice;
 }
 
 function treatGameInput (input) {
@@ -60,14 +54,11 @@ function playGame (userInput) {
 
         showNpcPlay (botInput);
 
-        if(playerWinsPlay(userInput, botInput)) playerScore++;
+        let hasPlayerWonRound = playerWinsPlay(userInput, botInput);
+        if(hasPlayerWonRound) playerScore++;
+        showPlayResult(hasPlayerWonRound);
         
-        if(curPlaysLeft <= (--curPlaysLeft)) {
-            showResult();
-        }
-        
-    } else {
-        showResult();
+        if(--curPlaysLeft <= 0) showGameResult();
     }
 }
 
@@ -81,11 +72,23 @@ function cleanPage () {
     }
 }
 
-function showResult ()  {
-    //TODO
-    const result = document.createElement("p");
-    result.textContent = `Out of the five games, player won ${playerScore} of them`;
-    resultSec.appendChild(result);
+function showPlayResult (playerWon){
+    const playResult = document.createElement("p");
+    
+    if (playerWon) {
+        playResult.textContent = "The player has won this play! Keep it going!"
+    } else {
+        playResult.textContent = "The NPC has won this play, try next time!"
+    }
+    
+    resultSec.append(playResult);
+}
+
+
+function showGameResult ()  {
+    const gameResult = document.createElement("p");
+    gameResult.textContent = `Out of the five games, player won ${playerScore} of them`;
+    resultSec.appendChild(gameResult);
 
     //resets game
     curPlaysLeft = 5;
