@@ -2,6 +2,17 @@ const npcPlay = document.querySelector(".npc-play");
 const playButtons = document.querySelector(".play-btns");
 const resultSec = document.querySelector(".result");
 
+let curPlaysLeft = 5;
+let playerScore = 0;
+
+
+playButtons.addEventListener("click", (e) => {
+    cleanPage();
+    let playerChoice = treatGameInput(e.target.textContent);
+    playGame(playerChoice);
+    
+});
+
 function getComputerChoice () {
     let choice = Math.floor((Math.random() * 3) + 1);
     let play;
@@ -42,19 +53,36 @@ function playerWinsPlay (userInput, botInput) {
     }
 }
 
-function playGame () {
-    let score = 0;
-
-    for (let plays = 1; plays <= 5; plays++ ) {
-        const userInput = getHumanChoice();
+function playGame (userInput) {
+    //let score = 0;
+    if(!curPlaysLeft <= 0) {
         const botInput = getComputerChoice();
     
-        if(playerWinsPlay(userInput, botInput)) score++;
+        if(playerWinsPlay(userInput, botInput)) playerScore++;
+        
+        if(curPlaysLeft <= (--curPlaysLeft)) {
+            showResult();
+        }
+        
+    } else {
+        showResult();
     }
-
-    return showResult(score)
 }
 
-function showResult (gameScore) {
-    return `Player won ${gameScore} of the total 5 games!`
+
+function cleanPage () {
+    let resultChildren = Array.from(resultSec.children);
+    if (!resultChildren.length === 0) {
+        resultChildren.forEach(element => {
+            element.textContent = " ";
+        });
+    }
+}
+
+function showResult ()  {
+    //TODO
+    const result = document.createElement("p");
+    result.textContent = `Out of the five games, player won ${playerScore} of them`;
+    resultSec.appendChild(result);
+
 }
