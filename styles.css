@@ -10,9 +10,28 @@ body{
     justify-content: center;
 }
 
-h1, .npc-play > p {
+h1,.play-placeholder, .result,.npc-play-container > p {
     color: white;
 }
+
+.npc-play-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.npc-play-container > p {
+    font-weight: 500;
+    font-size: 30px;
+}
+
+#npc-placeholder-play {
+    font-weight: 400;
+    font-size: 18px;
+}
+
 
 h1 {
     font-size: 50px;
@@ -45,4 +64,8 @@ h1 {
 
 #scissors-play-btn {
     color: yellowgreen;
+}
+
+.result {
+    text-decoration: underline;
 }

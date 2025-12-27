@@ -51,6 +51,7 @@ function playGame (userInput) {
     //let score = 0;
     if(!curPlaysLeft <= 0) {
         const botInput = getComputerChoice();
+        changeBgColor(botInput);
 
         showNpcPlay (botInput);
 
@@ -99,4 +100,19 @@ function showGameResult ()  {
 function showNpcPlay (play) {
     npcPlay.textContent = " ";
     npcPlay.textContent = play;
+}
+
+function changeBgColor (npcPlay) {
+    switch (npcPlay) {
+        case "Scissors":
+            pageBody.style.backgroundColor = "yellowgreen";
+            break;
+        case "Paper":
+            pageBody.style.backgroundColor = "blue";
+            break;
+        case "Rock":
+            pageBody.style.backgroundColor = "brown";
+            break;
+    }
+
 }
